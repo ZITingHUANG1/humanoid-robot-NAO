@@ -1,0 +1,7 @@
+#CREATE request parameters
+string qrstring
+--------------------------------
+#CREATE response parameters
+bool valid
+string name
+

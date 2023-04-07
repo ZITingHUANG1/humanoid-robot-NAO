@@ -1,0 +1,42 @@
+<launch>
+  <!--
+  	This pushes the local PYTHONPATH into the launch file, so that the NaoQI API is found.
+    You need to add the Nao's API dir to your PYTHONPATH so that the modules are found.
+
+    This launch file launches the nao_1 executable and all the required ROS service scripts.
+  -->
+  <env name="PYTHONPATH" value="$(env PYTHONPATH)" />
+  
+  <arg name="nao_ip" default="$(optenv NAO_IP 10.152.246.151)" />
+  <arg name="nao_port" default="$(optenv NAO_PORT 9559)" />
+
+  <param name="enable_xpad" command="sudo modprobe xpad" />
+  
+  <param name="param_load" command="rosparam load Naovid_param.yaml" />
+
+  <node pkg="Naovid" type="stand_up.py" name="stand_up" required="true" args="$(arg nao_ip) $(arg nao_port)" output="screen"/>
+
+  <node pkg="Naovid" type="aruco.py" name="aruco_walk" required="true" args="$(arg nao_ip) $(arg nao_port)" output="screen"/>
+
+  <node pkg="Naovid" type="animated_speech.py" name="animated_speech" required="true" args="$(arg nao_ip) $(arg nao_port)" output="screen"/>
+
+  <node pkg="Naovid" type="move_head_service.py" name="move_head" required="true" args="$(arg nao_ip) $(arg nao_port)" output="screen"/>
+
+  <node pkg="Naovid" type="move_service.py" name="move_service" required="true" args="$(arg nao_ip) $(arg nao_port)" output="screen"/>
+
+  <node pkg="Naovid" type="certificate_check.py" name="certificate_check" required="true"  output="screen"/>
+
+  <node pkg="Naovid" type="nao_1" name="nao_1" required="true" args="$(arg nao_ip) $(arg nao_port)" output="screen"/>
+  
+
+  <?ignore
+  <param name="tactile" command="roslaunch nao_apps tactile.launch" />
+  <param name="leds" command="roslaunch nao_apps leds.launch" />
+  <param name="speech" command="roslaunch nao_apps speech.launch" />
+<include file="$(find nao_apps)/launch/tactile.launch" />
+<include file="$(find nao_apps)/launch/leds.launch" />
+  <param name="docker_run" command="docker run -p 8000:8000 -e CERT_COUNTRY=DE ghcr.io/merlinschumacher/open-covid-certificate-validator:main" />
+
+  <node pkg="Naovid" type="move_service.py" name="move_service" required="true" args="$(arg nao_ip) $(arg nao_port)" output="screen"/>
+  ?>
+</launch>

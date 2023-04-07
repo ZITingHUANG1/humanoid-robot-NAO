@@ -1,0 +1,6 @@
+#CREATE request parameters
+bool fallen
+--------------------------------
+#CREATE response parameters
+bool ready
+

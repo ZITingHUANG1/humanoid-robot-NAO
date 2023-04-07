@@ -1,0 +1,6 @@
+#CREATE request parameters
+string jointname
+--------------------------------
+#CREATE response parameters
+float64[] position
+

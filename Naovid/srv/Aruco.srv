@@ -1,0 +1,12 @@
+#CREATE request parameters
+
+float64 markerx
+float64 markery
+float64 markerz
+
+--------------------------------
+#CREATE response parameters
+float64 markertorsox
+float64 markertorsoy
+float64 markertorsoz
+

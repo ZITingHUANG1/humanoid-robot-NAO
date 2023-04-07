@@ -1,0 +1,17 @@
+#CREATE request parameters
+string jointname
+float64[] position
+float64[] orientation
+float64 maxspeed
+float64[] time
+float64 markerx
+float64 markery
+float64 markerz
+float64 markerrx
+float64 markerry
+float64 markerrz
+bool moveArm
+--------------------------------
+#CREATE response parameters
+float64[] position
+

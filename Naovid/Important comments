@@ -1,0 +1,65 @@
+///Project/////
+
+//MATERIAL NEEDED:
+- SHIRTS
+- Client Computer for teleassistant (main one)
+- Laptop with Zoom
+- Aruco 99
+- Xbox controller
+- Head Set
+
+//SCHEDULE
+
+
+
+//To launch all:
+docker run -p 8000:8000 -e CERT_COUNTRY=DE ghcr.io/merlinschumacher/open-covid-certificate-validator:main
+roslaunch nao_bringup nao_full_py.launch
+roslaunch Naovid nao_apps.launch
+roslaunch Naovid nao.launch
+
+////////
+
+Commands for the projects:
+sudo docker run -p 8000:8000 -e CERT_COUNTRY=DE ghcr.io/merlinschumacher/open-covid-certificate-validator:main
+rosrun Naovid testcovidapi.py
+rosrun Naovid get_joint_position.py 10.152.246.151 9559
+rosrun Naovid stop_tracker.py 10.152.246.151 9559
+
+Param file in home/ros/Naovid_ws/Naovid_param.yaml
+
+//To launch seperately
+
+rosrun Naovid testcovidapi.py
+rosrun Naovid certificate_check.py
+rosrun Naovid shirtdetection
+roslaunch nao_apps tactile.launch
+roslaunch nao_apps leds.launch
+roslaunch nao_apps speech.launch
+cd ros/Naovid_ws
+rosrun Naovid move_service.py 10.152.246.151 9559
+cd ros/Naovid_ws
+rosrun Naovid aruco.py 10.152.246.151 9559
+cd ros/Naovid_ws
+
+//client
+rosrun Naovid nao_1
+
+//move_service_py of nao_control_tutorial_2
+
+
+// position RArm for not entering
+[0.05295798182487488, -0.3012227416038513, 0.06636833399534225, 1.242143988609314, 0.13868732750415802, -1.1604794263839722]
+
+// position RArm for entering
+[-0.08860170841217041, -0.1407432109117508, -0.09632524847984314, 0.9218837022781372, 1.131942629814148, -2.8761088848114014]
+
+// position RArm init
+[0.027195051312446594, -0.12570053339004517, -0.11460645496845245, 2.3714473247528076, 1.3832350969314575, -0.6055759191513062]
+
+// position RArm waving init
+[0.06098267436027527, -0.22116714715957642, 0.1939358115196228, 0.6566203832626343, -1.2457923889160156, -0.5968418717384338]
+
+// position RArm waving second
+[0.07584589719772339, -0.28096628189086914, 0.1493038833141327, 1.0772671699523926, -0.6148801445960999, -1.0763087272644043]
+
